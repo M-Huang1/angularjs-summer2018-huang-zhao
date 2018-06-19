@@ -1,7 +1,7 @@
 export class SectionServiceClient {
 
-  SECTION_URL = 'http://localhost:4000/api/course/COURSEID/section';
-  CRUD_URL = 'http://localhost:4000/api/section/SECTIONID';
+  SECTION_URL = 'https://webdev-huang-nodejs-s18.herokuapp.com/api/course/COURSEID/section';
+  CRUD_URL = 'https://webdev-huang-nodejs-s18.herokuapp.com/api/section/SECTIONID';
 
 
 

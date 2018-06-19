@@ -1,6 +1,6 @@
 export class EnrollmentServiceClient {
 
-  ENROLLMENT_URL = 'http://localhost:4000/api/student/STUDENTID/section';
+  ENROLLMENT_URL = 'https://webdev-huang-nodejs-s18.herokuapp.com/api/student/STUDENTID/section';
 
 
   enrollStudentInSection(sectionId, studentId) {

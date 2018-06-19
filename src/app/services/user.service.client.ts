@@ -1,14 +1,16 @@
 export class UserServiceClient {
 
+  DB_URL= "https://webdev-huang-nodejs-s18.herokuapp.com";
+
 
   findUserByUsername(username){
-    return fetch('http://localhost:4000/api/username/' + username)
+    return fetch(this.DB_URL + '/api/username/' + username)
       .then(response => {
         return response.json()
       });
   }
   findUserById(userId){
-    return fetch('http://localhost:4000/api/user/' + userId)
+    return fetch(this.DB_URL + '/api/user/' + userId)
       .then(response => {
         return response.json()
       });
@@ -16,7 +18,7 @@ export class UserServiceClient {
 
 
   updateUser(user){
-    return fetch('http://localhost:4000/api/profile', {
+    return fetch(this.DB_URL + '/api/profile', {
         body: JSON.stringify(user),
         credentials: 'include', // include, same-origin, *omit
         method: 'put',
@@ -31,7 +33,7 @@ export class UserServiceClient {
       username: username,
       password: password
     };
-    return fetch('http://localhost:4000/api/login', {
+    return fetch(this.DB_URL + '/api/login', {
       method: 'post',
       body: JSON.stringify(credentials),
       credentials: 'include',
@@ -45,7 +47,7 @@ export class UserServiceClient {
   }
 
   logout() {
-    return fetch('http://localhost:4000/api/logout', {
+    return fetch(this.DB_URL + '/api/logout', {
       method: 'post',
       credentials: 'include'
     });
@@ -53,13 +55,12 @@ export class UserServiceClient {
 
 
   profile() {
-    return fetch('http://localhost:4000/api/profile',
+    return fetch(this.DB_URL + '/api/profile',
       {
         credentials: 'include', // include, same-origin, *omit
       })
       .then(response => {
-        const answer = response.json();
-        return answer;
+        return response.json();
 
       });
 
@@ -71,7 +72,7 @@ export class UserServiceClient {
       password: password,
       role:'student'
     };
-    return fetch('http://localhost:4000/api/register', {
+    return fetch(this.DB_URL + '/api/register', {
       body: JSON.stringify(user),
       credentials: 'include', // include, same-origin, *omit
       method: 'post',
