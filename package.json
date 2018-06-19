@@ -1,9 +1,9 @@
 {
-  "name": "angularjs-huang-zhao-summer1",
+  "name": "angularjs-summer2018-huang-zhao",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "heroku-postbuild": "ng build --prod",
+    "postinstall": "ng build --aot --prod",
     "start": "node server.js",
     "build": "ng build",
     "test": "ng test",
