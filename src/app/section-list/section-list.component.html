@@ -3,6 +3,9 @@
         href="../../assets/dist/css/bootstrap.css"/>
 <div class="container-fluid">
   <h1>Sections for course: {{courseId}}</h1>
+  <a routerLink="/home"><button class="btn btn-primary">Home</button></a>
+  <br>
+  <br>
   <div *ngIf="role == 'admin'">
   <input type='text' [(ngModel)]="sectionName"
          placeholder="Section Name"
@@ -12,10 +15,13 @@
          placeholder="Seats available"
          class="form-control">
     <div class="warningText" *ngIf='seats.length < 1'> Seats Cannot Be Empty</div>
+    <div class="warningText" *ngIf='seatsNotCorrect()'> Seats Must Be A Number Greater Than 0</div>
   <button (click)="createSection(sectionName, seats)" class="btn btn-success btn-block">
     Add Section
   </button>
+    <br>
   </div>
+  <div *ngIf="role == ''"><p>Please login to enroll in a section!</p><br></div>
   <div class="row">
     <div *ngFor="let section of sections" class="col-sm-3">
       <div class="card">

@@ -1,17 +1,24 @@
 
-
+<link   rel="stylesheet"
+        type="text/css"
+        href="../../assets/dist/css/bootstrap.css"/>
 <div class="container-fluid">
-  <h1>{{course.title}}</h1>
+  <h1 *ngIf="course != undefined">{{course.title}}</h1>
+  <h1 *ngIf="course == undefined">Course Title</h1>
+  <hr>
 
   <a routerLink="/home"><button class="btn btn-primary">Home</button></a>
+  <a *ngIf="course != undefined" routerLink="/course/{{course.id}}/section"><button class="btn btn-primary">Enrollment</button></a>
+  <br>
   <br>
 
   <div class="row">
 
     <div class="col-3 moduleList">
       <h2>Modules</h2>
+      <hr>
       <ul class="list-group">
-        <li class="list-group-item" (click)="selectModule(module.id)" *ngFor="let module of modules">
+        <li class="list-group-item" style="border-color: gray;" (click)="selectModule(module.id)" *ngFor="let module of modules">
           <div *ngIf="module.id == moduleId" class="moduleSelected">
             {{module.title}}
           </div>
@@ -23,13 +30,13 @@
       </ul>
     </div>
     <div class="col-9">
-      <h2>Lessons for Module with ID {{moduleId}}</h2>
+      <h2 *ngIf="selectedModule != undefined">Lessons for {{selectedModule.title}}</h2>
       <ul class="nav nav-tabs">
-        <li class="nav-item" (click)="selectLesson(lesson.id)" *ngFor="let lesson of lessons">
-          <div *ngIf="lesson.id == lessonId" class="nav-link lessonSelected">
+        <li class="nav-item"  (click)="selectLesson(lesson.id)" *ngFor="let lesson of lessons">
+          <div *ngIf="lesson.id == lessonId" style="border-color: gray;" class="nav-link lessonSelected">
             {{lesson.title}}
           </div>
-          <div *ngIf="lesson.id != lessonId" class="nav-link">
+          <div *ngIf="lesson.id != lessonId" style="border-color: gray;" class="nav-link">
             {{lesson.title}}
           </div>
         </li>
@@ -37,6 +44,12 @@
 
       <div class="container">
         <div  class="panel-group">
+          <div *ngIf="widgets.length > 0">
+          <br>
+          <h3>Lesson Homepage</h3>
+          <hr>
+          <br>
+          </div>
           <div *ngFor="let widget of widgets" class="panel panel-default">
             <div *ngIf="widget.className=='list'" class="panel-body">
               <ol *ngIf="widget.listType =='ordered'">

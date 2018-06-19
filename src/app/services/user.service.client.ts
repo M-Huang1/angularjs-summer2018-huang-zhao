@@ -51,12 +51,18 @@ export class UserServiceClient {
     });
   }
 
+
   profile() {
     return fetch('http://localhost:4000/api/profile',
       {
         credentials: 'include', // include, same-origin, *omit
       })
-      .then(response => response.json());
+      .then(response => {
+        const answer = response.json();
+        return answer;
+
+      });
+
   }
 
   createUser(username, password) {

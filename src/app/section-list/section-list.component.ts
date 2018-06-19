@@ -78,6 +78,9 @@ export class SectionListComponent implements OnInit {
       })
   }
 
+  seatsNotCorrect(){
+    return (isNaN(Number(this.seats)) || Number(this.seats) <= 0)
+  }
 
 
 

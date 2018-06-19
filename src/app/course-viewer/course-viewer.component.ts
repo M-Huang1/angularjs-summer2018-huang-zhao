@@ -19,6 +19,7 @@ export class CourseViewerComponent implements OnInit {
   //course: Course = new Course();
   course = undefined;
   modules=[];
+  selectedModule = undefined;
   lessons=[];
   widgets=[];
   constructor(private service: CourseServiceClient,
@@ -40,6 +41,15 @@ export class CourseViewerComponent implements OnInit {
         this.widgets=[];
         this.moduleId = undefined;
         this.lessonId = undefined;
+        this.selectedModule = undefined;
+      })
+      .then(()=> {
+        this.moduleService.findModulesForCourse(this.courseId).then(
+          (modules) =>{
+            this.modules = modules;
+          }
+
+        )
       });
   }
 
@@ -48,6 +58,9 @@ export class CourseViewerComponent implements OnInit {
     this.widgets=[];
     this.lessonId = undefined;
     this.moduleId = moduleId;
+    this.moduleService.findModuleById(this.moduleId).then((module) =>{
+      this.selectedModule = module;
+    });
     this.lessonService.findLessonsForModule(this.courseId,this.moduleId).then((lessons) =>
       {this.lessons = lessons;}
     )
@@ -60,24 +73,21 @@ export class CourseViewerComponent implements OnInit {
     this.lessonId = lessonId;
     this.widgetService.findWidgetsForLesson(this.courseId,this.moduleId,this.lessonId).then((widgets) =>
     {
-      console.log(widgets);
+
       this.widgets = widgets;
     })
   }
   ngOnInit() {
     this.route.params.subscribe(params =>
     {
+
       this.courseId = params['courseId'];
       this.loadCourse(this.courseId);
+
     });
 
 
-    this.moduleService.findModulesForCourse(this.courseId).then(
-      (modules) =>{
-        this.modules = modules;
-      }
 
-    )
 
 
   }

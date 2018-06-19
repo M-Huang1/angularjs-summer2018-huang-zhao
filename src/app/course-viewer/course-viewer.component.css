@@ -13,8 +13,21 @@
 .moduleSelected{
   background-color: gray;
   outline-color: black;
+
 }
 .lessonSelected{
   background-color: gray;
   outline-color: black;
+}
+.list-group-item{
+  margin-top: 15px;
+  box-shadow: 10px 5px black;
+}
+
+.nav-link{
+  color: #005cbf;
+
+}
+.btn{
+  margin-right: 5px;
 }

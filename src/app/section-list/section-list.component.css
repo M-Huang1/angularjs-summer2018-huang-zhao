@@ -16,3 +16,9 @@ input[type=text]:focus, input[type=password]:focus {
   color: red;
   margin-bottom: 5px;
 }
+
+.card-body{
+  box-shadow: 5px 5px black;
+  height: 150px;
+  background-color: lightblue;
+}

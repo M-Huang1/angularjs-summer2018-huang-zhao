@@ -2,16 +2,16 @@
   <h1>
     White Board
   </h1>
+  <hr>
   <div *ngIf='userId == ""'>
-  <a routerLink="/login"><button class="btn btn-primary">Link To Login Page</button></a>
-  <a routerLink="/register"><button class="btn btn-primary linkButton">Link to Register</button></a>
+  <a routerLink="/login"><button class="btn btn-primary">Login</button></a>
+  <a routerLink="/register"><button class="btn btn-primary linkButton">Register</button></a>
   </div>
   <div *ngIf='userId != ""'>
     <p>Welcome {{this.username}}!</p>
-    <a routerLink="/profile"><button class="btn btn-primary">Link To Profile Page</button></a>
+    <a routerLink="/profile"><button class="btn btn-primary">Profile</button></a>
     <a class="logout" (click)="logout()"><button class="btn btn-danger linkButton">Logout</button></a>
   </div>
   <br>
-
   <app-course-grid></app-course-grid>
 </div>

@@ -26,7 +26,9 @@
   <ul class="list-group">
     <li *ngFor="let enrollment of sections" class="list-group-item">
       {{enrollment.section.name}}
-      ({{enrollment.section.currentSeats}})
+      ({{enrollment.section.currentSeats + ' seats remaining'}})
+      <a routerLink="/course/{{enrollment.section.courseId}}/section"><button class="btn btn-primary section">Edit Enrollment</button></a>
+
     </li>
   </ul>
 
