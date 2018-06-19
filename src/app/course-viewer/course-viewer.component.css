@@ -1,0 +1,20 @@
+.moduleList{
+  border-right: 2px solid black;
+  border-top: 2px solid black;
+  height: 100vh;
+}
+
+
+.list-group-item.hover{
+  background-color: grey;
+  outline-color: black;
+}
+
+.moduleSelected{
+  background-color: gray;
+  outline-color: black;
+}
+.lessonSelected{
+  background-color: gray;
+  outline-color: black;
+}

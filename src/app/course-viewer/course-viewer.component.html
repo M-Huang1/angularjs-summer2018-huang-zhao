@@ -1,3 +1,77 @@
+
+
 <div class="container-fluid">
-  <h2>{{course.title}}</h2>
+  <h1>{{course.title}}</h1>
+
+  <div class="row">
+
+    <div class="col-3 moduleList">
+      <h2>Modules</h2>
+      <ul class="list-group">
+        <li class="list-group-item" (click)="selectModule(module.id)" *ngFor="let module of modules">
+          <div *ngIf="module.id == moduleId" class="moduleSelected">
+            {{module.title}}
+          </div>
+          <div *ngIf="module.id != moduleId">
+            {{module.title}}
+          </div>
+        </li>
+
+      </ul>
+    </div>
+    <div class="col-9">
+      <h2>Lessons for Module with ID {{moduleId}}</h2>
+      <ul class="nav nav-tabs">
+        <li class="nav-item" (click)="selectLesson(lesson.id)" *ngFor="let lesson of lessons">
+          <div *ngIf="lesson.id == lessonId" class="nav-link lessonSelected">
+            {{lesson.title}}
+          </div>
+          <div *ngIf="lesson.id != lessonId" class="nav-link">
+            {{lesson.title}}
+          </div>
+        </li>
+      </ul>
+
+      <div class="container">
+        <div  class="panel-group">
+          <div *ngFor="let widget of widgets" class="panel panel-default">
+            <div *ngIf="widget.className=='list'" class="panel-body">
+              <ol *ngIf="widget.listType =='ordered'">
+                <li *ngFor="let text of widget.text.split('\n')">
+                  {{text}}
+                </li>
+              </ol>
+              <ul *ngIf="widget.listType =='unordered'">
+                <li *ngFor="let text of widget.text.split('\n')">
+                  {{text}}
+                </li>
+              </ul>
+            </div>
+            <div *ngIf="widget.className=='heading'" class="panel-body">
+              <h1 *ngIf="widget.size==1"> {{widget.text}}</h1>
+              <h2 *ngIf="widget.size==2"> {{widget.text}}</h2>
+              <h3 *ngIf="widget.size==3"> {{widget.text}}</h3>
+            </div>
+
+            <div *ngIf="widget.className=='paragraph'" class="panel-body">
+              <p>{{widget.text}}</p>
+            </div>
+
+            <div *ngIf="widget.className=='image'" class="panel-body">
+              <img src={{widget.src}} width={{widget.width}} height={{widget.height}}/>
+            </div>
+
+            <div *ngIf="widget.className=='link'" class="panel-body">
+              <a href={{widget.href}}>{{widget.text}}</a>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+
 </div>

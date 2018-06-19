@@ -16,6 +16,10 @@ import {UserServiceClient} from './services/user.service.client';
 import {SectionServiceClient} from './services/section.service.client';
 import { CourseGridComponent } from './course-grid/course-grid.component';
 import {EnrollmentServiceClient} from './services/enrollment.service.client';
+import { ModuleListComponent } from './module-list/module-list.component';
+import {ModuleServiceClient} from './services/module.service.client';
+import {LessonServiceClient} from './services/lesson.service.client';
+import {WidgetServiceClient} from './services/widget.service.client';
 
 @NgModule({
   declarations: [
@@ -27,7 +31,8 @@ import {EnrollmentServiceClient} from './services/enrollment.service.client';
     LoginComponent,
     CourseViewerComponent,
     SectionListComponent,
-    CourseGridComponent
+    CourseGridComponent,
+    ModuleListComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +43,10 @@ import {EnrollmentServiceClient} from './services/enrollment.service.client';
     CourseServiceClient,
     UserServiceClient,
     SectionServiceClient,
-    EnrollmentServiceClient
+    EnrollmentServiceClient,
+    ModuleServiceClient,
+    LessonServiceClient,
+    WidgetServiceClient
   ],
   bootstrap: [AppComponent]
 })
