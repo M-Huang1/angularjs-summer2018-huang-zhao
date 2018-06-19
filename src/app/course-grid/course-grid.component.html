@@ -8,7 +8,7 @@
         <p class="card-text"> Created: {{course.created}}</p>
         <a routerLink="/course/{{course.id}}"
            class="btn btn-primary">Course Info</a>
-        <a routerLink="/course/{{course.id}}/section"
+        <a *ngIf='userId !=""' routerLink="/course/{{course.id}}/section"
            class="btn btn-primary linkButton">Enroll</a>
       </div>
     </div>

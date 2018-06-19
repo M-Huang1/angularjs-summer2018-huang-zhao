@@ -8,8 +8,10 @@
   </div>
   <div *ngIf='userId != ""'>
     <p>Welcome {{this.username}}!</p>
+    <a routerLink="/profile"><button class="btn btn-primary">Link To Profile Page</button></a>
     <a class="logout" (click)="logout()"><button class="btn btn-danger linkButton">Logout</button></a>
   </div>
+  <br>
 
   <app-course-grid></app-course-grid>
 </div>

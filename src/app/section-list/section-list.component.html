@@ -1,21 +1,35 @@
+<link   rel="stylesheet"
+        type="text/css"
+        href="../../assets/dist/css/bootstrap.css"/>
 <div class="container-fluid">
   <h1>Sections for course: {{courseId}}</h1>
-  <input [(ngModel)]="sectionName"
+  <div *ngIf="role == 'admin'">
+  <input type='text' [(ngModel)]="sectionName"
          placeholder="Section Name"
          class="form-control">
-  <input [(ngModel)]="seats"
+    <div class="warningText" *ngIf='sectionName.length < 1'> Section Name Cannot Be Empty</div>
+  <input type='text' [(ngModel)]="seats"
          placeholder="Seats available"
          class="form-control">
+    <div class="warningText" *ngIf='seats.length < 1'> Seats Cannot Be Empty</div>
   <button (click)="createSection(sectionName, seats)" class="btn btn-success btn-block">
     Add Section
   </button>
+  </div>
+  <div class="row">
+    <div *ngFor="let section of sections" class="col-sm-3">
+      <div class="card">
+        <div class="card-body">
+          <h2 class="card-title">{{section.name}} </h2>
+          <p> {{section.currentSeats}} Seats Left</p>
+          <button *ngIf="enrolledSection == undefined" (click)="enroll(section)"
+                  class=" btn btn-primary">Enroll</button>
+          <button *ngIf="section._id == enrolledId" (click)="unroll(section)"
+                  class=" btn btn-danger">Unroll</button>
+        </div>
+      </div>
 
-  <ul class="list-group">
-    <li *ngFor="let section of sections" class="list-group-item">
-      {{section.name}} {{section.currentSeats}}
-      <button (click)="enroll(section)"
-              class="float-right btn btn-primary">Enroll</button>
-    </li>
-  </ul>
+    </div>
+  </div>
 
 </div>

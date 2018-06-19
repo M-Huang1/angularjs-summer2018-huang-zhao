@@ -4,7 +4,7 @@ export class EnrollmentServiceClient {
 
 
   enrollStudentInSection(sectionId, studentId) {
-    const url = this.ENROLLMENT_URL.replace('STUDENTID', studentId) + '/' + sectionId;
+    const url = this.ENROLLMENT_URL.replace('STUDENTID', studentId) + '/' + sectionId +'/enroll';
     return fetch(url, {
       method: 'post',
       credentials: 'include'

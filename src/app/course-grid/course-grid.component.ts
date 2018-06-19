@@ -27,6 +27,14 @@ export class CourseGridComponent implements OnInit {
         )
 
       })
+
+    this.userService
+      .profile()
+      .then(user => {
+        if (user._id != null && user._id != undefined) {
+          this.userId = user._id;
+        }
+      })
   }
 }
 

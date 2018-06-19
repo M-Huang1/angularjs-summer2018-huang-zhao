@@ -15,32 +15,35 @@ export class ProfileComponent implements OnInit {
   constructor(private service: UserServiceClient,
               private sectionService: SectionServiceClient,
               private enrollmentService: EnrollmentServiceClient,
-              private router: Router) { }
+              private router: Router) {
+  }
 
   user = {};
-  userId="";
+  userId = "";
   username;
   firstName;
   lastName;
   password;
+  enrolledSections =[]
   sections = [];
 
+
   update() {
-    const user= {
+    const user = {
       firstName: this.firstName,
       lastName: this.lastName,
     };
 
-    this.service.updateUser(user).then(()=>{
+    this.service.updateUser(user).then(() => {
       this.service.findUserById(this.userId)
-        .then((user) =>{
+        .then((user) => {
 
           this.firstName = user.firstName;
-          if(this.firstName == undefined || this.firstName == null){
+          if (this.firstName == undefined || this.firstName == null) {
             this.firstName = '';
           }
           this.lastName = user.lastName;
-          if(this.lastName == undefined || this.lastName== null){
+          if (this.lastName == undefined || this.lastName == null) {
             this.lastName = '';
           }
         });
@@ -56,12 +59,14 @@ export class ProfileComponent implements OnInit {
 
   }
 
+
+
   ngOnInit() {
     this.service
       .profile()
       .then(user => {
         this.username = user.username;
-        if(user._id != null && user._id != undefined) {
+        if (user._id != null && user._id != undefined) {
           this.userId = user._id;
           this.service.findUserById(this.userId)
             .then((user) => {
@@ -76,10 +81,14 @@ export class ProfileComponent implements OnInit {
               }
             });
         }
-      });
-    this.enrollmentService
-      .findSectionsForStudent(this.userId)
-      .then(sections => this.sections = sections );
-  }
+        this.enrollmentService
+          .findSectionsForStudent(this.userId)
+          .then(sections => {
+              this.sections = sections;
+            }
+          )
 
+      })
+
+  }
 }

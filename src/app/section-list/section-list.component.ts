@@ -16,21 +16,31 @@ export class SectionListComponent implements OnInit {
               private enrollmentService: EnrollmentServiceClient,
               private router: Router,
               private route: ActivatedRoute) {
-    this.route.params.subscribe(params => this.loadSections(params['courseId']));
+
   }
 
   sectionName = '';
   seats = '';
+  role='';
   courseId = '';
+  enrolledSection = undefined;
+  enrolledId = undefined;
   sections = [];
-  userId = -1;
+  userId = '';
   ngOnInit() {
     this.userService
       .profile()
       .then(user => {
-        console.log(user.id);
-        this.userId = user.id;
-      })
+        this.userId = user._id;
+        this.role = user.role;
+        this.route.params.subscribe(params => {
+          this.courseId = params['courseId'];
+          this.loadSections(params['courseId']);
+        })
+
+      });
+
+
   }
 
 
@@ -39,21 +49,54 @@ export class SectionListComponent implements OnInit {
     this
       .sectionService
       .findSectionsForCourse(courseId)
-      .then(sections => this.sections = sections);
+      .then(sections =>
+      {
+        this.sections = sections;
+        this.getEnrolledSections()});
   }
 
+  getEnrolledSections() {
+    this.enrollmentService.findSectionsForStudent(this.userId).then(
+      (enrollments) => {
+        this.enrolledSection = undefined;
+        this.enrolledId = undefined;
+        enrollments.map((enrollment) => {
+          this.sections.map((section) => {
+            if (enrollment.section._id == section._id) {
+              this.enrolledSection = section;
+              this.enrolledId = section._id;
+            }
+          })
+        })
+      })
+  }
+
+
+
+
   createSection(sectionName, seats) {
-    this
-      .sectionService
-      .createSection(this.courseId, sectionName, seats)
-      .then(() => {
-        this.loadSections(this.courseId);
-      });
+    if(sectionName =='' || seats == ''){
+      alert('Both Fields Must not be Empty')
+    }
+    else if(isNaN(Number(seats))){
+      alert('Seats Must be A Number')
+    }
+    else if(Number(seats) <= 0){
+      alert('Seats Must Be Greater than Zero')
+    }
+    else {
+      this
+        .sectionService
+        .createSection(this.courseId, sectionName, seats)
+        .then(() => {
+          this.loadSections(this.courseId);
+        });
+    }
   }
 
   enroll(section) {
     // alert(section._id);
-    if (this.userId != -1) {
+    if (this.userId != '') {
       this.enrollmentService
         .enrollStudentInSection(section._id, this.userId)
         .then((response) => {
@@ -62,6 +105,11 @@ export class SectionListComponent implements OnInit {
     }
   }
 
+  unroll(section){
+    this.enrollmentService.deleteEnrollment(this.enrolledId,this.userId).then(() =>{
+      this.loadSections(this.courseId);
+    })
+  }
 
 
 }
