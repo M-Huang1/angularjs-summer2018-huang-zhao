@@ -1,17 +1,25 @@
 <div class="container-fluid">
-  <h1>Login</h1>
-
-  <input [(ngModel)]="username"
-         placeholder="username"
+  <h1>Whiteboard Login</h1>
+  <a routerLink="/register"><button class="btn btn-primary">Link To Register</button></a>
+  <a routerLink="/home"><button class="btn btn-primary linkButton">Link To Home</button></a>
+  <p>Please Enter Your Username and Password</p>
+  <hr>
+  <label><b>Username</b></label>
+  <input type="text" [(ngModel)]="username"
+         placeholder="Username"
          class="form-control"/>
-  <input [(ngModel)]="password"
-         placeholder="password"
+  <div class="warningText" *ngIf='tried == true && username.length < 1'> Username Cannot Be Empty</div>
+  <label><b>Password</b></label>
+  <input type="password" [(ngModel)]="password"
+         placeholder="Password"
          class="form-control"/>
+  <div class="warningText" *ngIf='tried == true && password.length < 1'> Password Cannot Be Empty</div>
+  <br>
+  <div class="warningText" *ngIf='mismatch == true'> Invalid Username and Password Combination</div>
   <button (click)="login(username, password)"
           class="btn btn-primary btn-block">
     Login
   </button>
 
-  <a routerLink="/register">Register</a>
-  <a routerLink="/home">Home</a>
+
 </div>

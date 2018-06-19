@@ -1,21 +1,38 @@
 <div class="container-fluid">
   <h1>Register</h1>
+  <a routerLink="/login"><button class="btn btn-primary">Link To Login Page</button></a>
+  <br>
+  <a routerLink="/home"><button class="btn btn-primary">Link to Homepage</button></a>
+  <p>Please fill in this form to create an account.</p>
+  <hr>
 
+  <label><b>Username</b></label>
   <input [(ngModel)]="username"
-         placeholder="username"
-         class="form-control"/>
+         type="text"
+         placeholder="Username"
+         class="form-control"
+         required/>
+  <div class="warningText" *ngIf='username === undefined || username.length < 1'> Username Cannot Be Empty</div>
+
+  <label><b>Password</b></label>
   <input [(ngModel)]="password"
-         placeholder="password"
-         class="form-control"/>
+         type="password"
+         placeholder="Password"
+         class="form-control"
+         required/>
+  <div class="warningText" *ngIf='password=== undefined || password.length < 1'> Password Cannot Be Empty</div>
+  <label><b>Verify Password</b></label>
   <input [(ngModel)]="password2"
-         placeholder="verify password"
-         class="form-control"/>
+         type="password"
+         placeholder="Verify Password"
+         class="form-control"
+         required/>
+  <div class="warningText" *ngIf='password != password2'> Passwords Must Match</div>
+
   <button (click)="register(username, password, password2)"
           class="btn btn-primary btn-block">
     Register
   </button>
 
-  <a routerLink="/login">Login</a>
-  <a routerLink="/home">Home</a>
 
 </div>

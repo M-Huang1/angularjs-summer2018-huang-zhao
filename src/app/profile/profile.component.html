@@ -1,17 +1,20 @@
-<div class="container-fluid">
+<div *ngIf='userId != ""' class="container-fluid">
   <h1>Profile</h1>
-
-  <input [(ngModel)]="username"
-         placeholder="username"
+  <a routerLink="/home"><button class="btn btn-primary">Home</button></a>
+  <a class="logout" (click)="logout()"><button class="btn btn-danger linkButton">Logout</button></a>
+  <br>
+  <label><b>Username</b></label>
+  <input type="text" [(ngModel)]="username"
+         placeholder="Username"
+         class="form-control"
+         readonly/>
+  <label><b>First Name</b></label>
+  <input type="text" [(ngModel)]="firstName"
+         placeholder="First Name"
          class="form-control"/>
-  <input [(ngModel)]="firstName"
-         placeholder="first name"
-         class="form-control"/>
-  <input [(ngModel)]="lastName"
-         placeholder="lastName"
-         class="form-control"/>
-  <input [(ngModel)]="email"
-         placeholder="email"
+  <label><b>Last Name</b></label>
+  <input type="text"  [(ngModel)]="lastName"
+         placeholder="Last Name"
          class="form-control"/>
   <button (click)="update()"
           class="btn btn-primary btn-block">
@@ -23,11 +26,24 @@
   <ul class="list-group">
     <li *ngFor="let enrollment of sections" class="list-group-item">
       {{enrollment.section.name}}
-      ({{enrollment.section.seats}})
+      ({{enrollment.section.currentSeats}})
     </li>
   </ul>
 
-  <a (click)="logout()">Logout</a>
-  <a routerLink="/home">Home</a>
+
+
+
+</div>
+
+<div *ngIf='userId == ""' class="container-fluid">
+  <h1>Profile</h1>
+  <a routerLink="/home"><button class="btn btn-primary">Home</button></a>
+  <a routerLink="/login"><button class="btn btn-primary linkButton">Link To Login Page</button></a>
+  <br>
+
+  You are Currently Not Logged In! Please log in to see profile.
+
+
+
 
 </div>

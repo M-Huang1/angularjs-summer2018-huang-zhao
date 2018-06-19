@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
-import {CourseNavigatorServiceClient} from './services/CourseNavigatorService Client';
 import { CourseNavigatorComponent } from './course-navigator/course-navigator.component';
 import { RegisterComponent } from './register/register.component';
 import { WhiteBoardComponent } from './white-board/white-board.component';
@@ -16,6 +15,7 @@ import {CourseServiceClient} from './services/course.service.client';
 import {UserServiceClient} from './services/user.service.client';
 import {SectionServiceClient} from './services/section.service.client';
 import { CourseGridComponent } from './course-grid/course-grid.component';
+import {EnrollmentServiceClient} from './services/enrollment.service.client';
 
 @NgModule({
   declarations: [
@@ -35,10 +35,10 @@ import { CourseGridComponent } from './course-grid/course-grid.component';
     routing
   ],
   providers: [
-  CourseNavigatorServiceClient,
     CourseServiceClient,
     UserServiceClient,
-    SectionServiceClient
+    SectionServiceClient,
+    EnrollmentServiceClient
   ],
   bootstrap: [AppComponent]
 })

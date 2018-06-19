@@ -9,15 +9,31 @@ import {UserServiceClient} from '../services/user.service.client';
 })
 export class LoginComponent implements OnInit {
 
-  username;
-  password;
+  username='';
+  password='';
+  tried = false;
+  mismatch = false;
   login(username, password) {
-    console.log([username, password]);
-    this.service
-      .login(username, password)
-      .then(() => {
-        this.router.navigate(['profile']);
-      });
+    this.tried = true;
+    if(username.length < 1){
+      alert('Missing Username Field')
+    }
+    else if(password.length < 1){
+      alert('Missing Password Field')
+    }
+    else {
+      this.service
+        .login(username, password)
+        .then((response) => {
+          if(response == null){
+            this.mismatch = true;
+            alert('Invalid Username and Password Combination');
+          }
+          else {
+            this.router.navigate(['profile']);
+          }
+        });
+    }
   }
 
   constructor(private router: Router,
