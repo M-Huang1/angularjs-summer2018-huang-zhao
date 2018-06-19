@@ -16,6 +16,7 @@ export class CourseGridComponent implements OnInit {
 
   courses: Course[] = [];
   userId='';
+  role="";
   ngOnInit() {
     this.service.findAllCourses()
       .then(courses => {
@@ -26,13 +27,14 @@ export class CourseGridComponent implements OnInit {
         }
         )
 
-      })
+      });
 
     this.userService
       .profile()
       .then(user => {
         if (user._id != null && user._id != undefined) {
           this.userId = user._id;
+          this.role=user.role;
         }
       })
   }

@@ -43,7 +43,14 @@ export class SectionListComponent implements OnInit {
 
   }
 
+  deleteSection(sectionId){
+    if(this.role=='admin'){
+      this.sectionService.deleteSectionById(sectionId).then(() =>{
+        this.sections = this.sections.filter(section => section._id != sectionId);
 
+      })
+    }
+  }
   loadSections(courseId) {
     this.courseId = courseId;
     this

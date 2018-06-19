@@ -22,10 +22,13 @@
         <div class="card-body">
           <h2 class="card-title">{{section.name}} </h2>
           <p> {{section.currentSeats}} Seats Left</p>
-          <button *ngIf="enrolledSection == undefined && section.currentSeats > 0" (click)="enroll(section)"
+          <button *ngIf="enrolledSection == undefined && section.currentSeats > 0
+          && role =='student'" (click)="enroll(section)"
                   class=" btn btn-primary">Enroll</button>
           <button *ngIf="section._id == enrolledId" (click)="unroll(section)"
                   class=" btn btn-danger">Unroll</button>
+          <button *ngIf="role=='admin'" (click)="deleteSection(section._id)"
+                  class=" btn btn-danger">Delete Section</button>
         </div>
       </div>
 
